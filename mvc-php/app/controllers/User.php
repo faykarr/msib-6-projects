@@ -3,10 +3,21 @@ class User extends Controller
 {
     public function index()
     {
-        echo 'user/index';
+        $data['title'] = 'User';
+        $this->view('templates/header', $data);
+        $this->view('user/index', $data);
+        $this->view('templates/footer', $data);
     }
-    public function profile($nama = 'Faykar', $pekerjaan = 'Teknisi Jaringan & Server Kampus STMIK Widya Pratama Pekalongan')
+
+    public function profile($nama = 'Rizky', $pekerjaan = 'Programmer')
     {
-        echo "Halo, nama saya $nama, saya adalah seorang $pekerjaan";
+        $data = [
+            'title' => 'Profile',
+            'nama' => $nama,
+            'pekerjaan' => $pekerjaan
+        ];
+        $this->view('templates/header', $data);
+        $this->view('user/profile', $data);
+        $this->view('templates/footer', $data);
     }
 }
