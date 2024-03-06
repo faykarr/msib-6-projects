@@ -1,26 +1,27 @@
 <?php
 class BlogModel 
 {
-    private $blog = [
-        [
-            'penulis' => "Faykar",
-            'judul' => 'Belajar PHP MVC',
-            'tulisan' => 'Belajar PHP MVC itu menyenangkan, apalagi setelah paham!'
-        ],
-        [
-            'penulis' => "J.K Rowling",
-            'judul' => 'Harry Potter dan Batu Bertuah',
-            'tulisan' => 'Sebuah novel tentang seorang penyihir muda yang bernama Harry Potter.'
-        ],
-        [
-            'penulis' => "Tere Liye",
-            'judul' => 'Bumi',
-            'tulisan' => 'Sebuah novel tentang seorang anak yang bernama Bumi.'
-        ],
-    ];
+    private $table = 'blog';
+    private $db;
 
-    public function getAllBlog()
+    public function __construct()
     {
-        return $this->blog;
+        $this->db = new Database;
     }
+
+    // getAllBlogs
+    public function getAllBlogs()
+    {
+        $this->db->query('SELECT * FROM ' . $this->table);
+        return $this->db->resultAll();
+    }
+
+    // getBlogById
+    public function getBlogById($id)
+    {
+        $this->db->query('SELECT * FROM ' . $this->table . ' WHERE id=:id');
+        $this->db->bind(':id', $id);
+        return $this->db->resultSingle();
+    }
+
 }
