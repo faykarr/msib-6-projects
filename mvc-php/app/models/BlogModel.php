@@ -24,4 +24,16 @@ class BlogModel
         return $this->db->resultSingle();
     }
 
+    // tambahDataBlog
+    public function tambahDataBlog($data)
+    {
+        $query = "INSERT INTO blog VALUES ('', :judul, :tulisan, :penulis)";
+        $this->db->query($query);
+        $this->db->bind('judul', $data['judul']);
+        $this->db->bind('tulisan', $data['tulisan']);
+        $this->db->bind('penulis', $data['penulis']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
 }

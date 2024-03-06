@@ -21,4 +21,12 @@ class Blog extends Controller
         $this->view('blog/detail', $data);
         $this->view('templates/footer', $data);
     }
+
+    // insert
+    public function tambah() {
+        if ($this->model('BlogModel')->tambahDataBlog($_POST) > 0) {
+            header('Location: ' . BASE_URL . 'blog');
+            exit;
+        }
+    }
 }
