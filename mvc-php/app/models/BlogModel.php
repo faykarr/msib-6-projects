@@ -27,11 +27,21 @@ class BlogModel
     // tambahDataBlog
     public function tambahDataBlog($data)
     {
-        $query = "INSERT INTO blog VALUES ('', :judul, :tulisan, :penulis)";
+        $query = "INSERT INTO blog VALUES ('', :judul, :penulis, :tulisan)";
         $this->db->query($query);
         $this->db->bind('judul', $data['judul']);
-        $this->db->bind('tulisan', $data['tulisan']);
         $this->db->bind('penulis', $data['penulis']);
+        $this->db->bind('tulisan', $data['tulisan']);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
+    // hapusDataBlog
+    public function hapusDataBlog($id)
+    {
+        $query = "DELETE FROM blog WHERE id=:id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
         $this->db->execute();
         return $this->db->rowCount();
     }
